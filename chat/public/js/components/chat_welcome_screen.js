@@ -19,7 +19,7 @@ export default class ChatWelcome {
 						<path d="M12 1c-6.627 0-12 4.364-12 9.749 0 3.131 1.817 5.917 4.64 7.7.868 2.167-1.083 4.008-3.142 4.503 2.271.195 6.311-.121 9.374-2.498 7.095.538 13.128-3.997 13.128-9.705 0-5.385-5.373-9.749-12-9.749z"/>
 						</svg>
 					</span>
-					<h3>${__('Hi there ! 🙌🏼')}</h3>
+					<h5>${__('Welcome to Consistent Helpdesk')}</h5>
 					<p>
 						${__('We make it simple to connect with us.')}
 						${__('Ask us anything, or share your feedback.')}
@@ -45,8 +45,8 @@ export default class ChatWelcome {
 					id='start-conversation'>
 					${__('Start Conversation')}
 				</button>
-				<a class='chat-footer welcome-footer' target='_blank' href='https://frappeframework.com/'>
-					${__('⚡ Powered by Frappe')}
+				<a class='chat-footer welcome-footer' target='_blank' href=''>
+					${__(' Consistent MIT ')}
 				</a>
 			</div>
 		`;
