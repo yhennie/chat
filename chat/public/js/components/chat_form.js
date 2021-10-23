@@ -60,8 +60,8 @@ export default class ChatForm {
 			</div>
 		`;
     const footer_html = `
-      <a class='chat-footer' target='_blank' href='https://frappeframework.com/'>
-        ${__('⚡ Powered by Frappe')}
+      <a class='chat-footer' target='_blank' href=''>
+        ${__('Consistent MIT')}
       </a>
     `;
     this.$chat_form.append(form_html + footer_html);
