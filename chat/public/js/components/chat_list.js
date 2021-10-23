@@ -23,7 +23,7 @@ export default class ChatList {
   setup_header() {
     const chat_list_header_html = `
 			<div class='chat-list-header'>
-				<h5> style="color:blue" Consti Helpdesk  </h5>
+				<h5 style="color:blue;" >   Consti Helpdesk  </h5>
         <div class='add-room' 
           title='Create Private Room'>
           ${frappe.utils.icon('users', 'md')}
