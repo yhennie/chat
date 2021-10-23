@@ -22,7 +22,7 @@ export default class ChatWelcome {
 					<h5>${__('Welcome to Consistent Helpdesk')}</h5>
 					<p>
 						${__('We make it simple to connect with us.')}
-						${__('Ask us anything, or share your feedback.')}
+						${__(' ')}
 					</p>
 			</div>
 		`;
