@@ -2,7 +2,7 @@ from . import __version__ as app_version
 from frappe import __version__ as frappe_version
 
 app_name = "chat"
-app_title = "Frappe Chat"
+app_title = " Consti Helpdesk "
 app_publisher = "Frappe Technologies"
 app_description = "Chat application for frappe"
 app_icon = "octicon octicon-file-directory"
