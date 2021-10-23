@@ -23,7 +23,8 @@ export default class ChatList {
   setup_header() {
     const chat_list_header_html = `
 			<div class='chat-list-header'>
-      <p> Help Center </p>  <br> </br> f
+      <p> Help Center </p>  <br> 
+      <p>  </p>
       <b> <h5> IT Service Desk   </h5> </b> 
         <div class='add-room' 
           title='Create Private Room'>
