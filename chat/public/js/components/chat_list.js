@@ -29,10 +29,11 @@ export default class ChatList {
           ${frappe.utils.icon('users', 'md')}
         </div>
 			</div>
+       <br> 
 		`;
     this.$chat_list.append(chat_list_header_html);
   }
- <br> </br>  
+  
   setup_search() {
     const chat_list_search_html = `
 		<div class='chat-search'>
