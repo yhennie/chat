@@ -32,7 +32,7 @@ export default class ChatList {
 		`;
     this.$chat_list.append(chat_list_header_html);
   }
- <br> </br> 
+ <br> </br>  
   setup_search() {
     const chat_list_search_html = `
 		<div class='chat-search'>
