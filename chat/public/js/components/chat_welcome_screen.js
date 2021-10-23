@@ -34,7 +34,7 @@ export default class ChatWelcome {
 
     const reason_text =
       this.profile.chat_status === 'Online'
-        ? __('Typically replies in a few hours')
+        ? __('Typically replies in a few hour')
         : __('Just drop a message and we will get back to you soon');
 
     const bottom_html = `
