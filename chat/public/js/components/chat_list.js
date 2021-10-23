@@ -211,11 +211,6 @@ export default class ChatList {
         res.user_email = me.user_email;
         me.create_new_room(res);
       }
-    }); 
-
-    <div class='chat-list-header'> 
-    
-    <b> <h5> Consistent MIT    </h5> </b>  
-    </div>
+    });  
   }
 }
