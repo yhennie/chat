@@ -35,28 +35,8 @@ export default class ChatForm {
   setup_form() {
     const form_html = `
 			<div class='chat-form-container'>
-				<p class='chat-query-heading'>${__('Share your queries or comments here.')}</p>
-				<form>
-					<div class='form-group'>
-						<label class='form-label'>${__('Full Name')}</label>
-						<input type='text' class='form-control' id='chat-fullname' 
-							placeholder='${__('Please enter your full name')}'>
-					</div>
-					<div class='form-group'>
-						<label class='form-label'>${__('Email Address')}</label>
-						<input type='email' class='form-control' id='chat-email' 
-							placeholder='${__('Please enter your email')}'>
-					</div>
-					<div class='form-group'>
-						<label class='form-label'>${__('Message')}</label>
-						<textarea class='form-control' id='chat-message-area' 
-							placeholder='${__('Please enter your message')}'></textarea>
-					</div>
-					<button type='button' class='btn btn-primary w-100'
-						id='submit-form'>
-            ${__('Submit')}
-          </button>
-				</form>
+				<p class='chat-query-heading'>${__('Consistent Helpdesk Portal')}</p>
+		 
 			</div>
 		`;
     const footer_html = `
