@@ -26,7 +26,7 @@ export default class ChatBubble {
 		<div class='chat-bubble-closed chat-bubble ${bubble_visible}'>
 			<span class='cross-icon'>
 				${frappe.utils.icon('close-alt', 'lg')}
-			</span>
+			</span>  
 		</div>
 		`;
     this.$chat_bubble
