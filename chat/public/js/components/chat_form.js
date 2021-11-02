@@ -6,7 +6,7 @@ export default class ChatForm {
     this.$wrapper = opts.$wrapper;
     this.profile = opts.profile;
     this.setup();
-  }
+  }   
 
   setup() {
     this.$chat_form = $(document.createElement('div'));
@@ -18,9 +18,9 @@ export default class ChatForm {
   setup_header() {
     this.avatar_html = frappe.avatar(null, 'avatar-medium', this.profile.name);
     const header_html = `
-			<div class='chat-header mb-2'>
+			<div class='chat-header mb-2'> +
 				${this.avatar_html}
-				<div class='chat-profile-info'>
+				<div class='chat-profile-info'> 
 					<div class='chat-profile-name'>
 						${__(this.profile.name)}
 						<div class='online-circle'></div>
