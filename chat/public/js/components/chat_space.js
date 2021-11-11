@@ -24,6 +24,7 @@ export default class ChatSpace {
     this.$chat_space.addClass('chat-space');
     this.setup_header();
     this.fetch_and_setup_messages();
+    this.setup_socketio();
   }
 
   setup_header() {
@@ -56,7 +57,10 @@ export default class ChatSpace {
 
   async fetch_and_setup_messages() {
     try {
-      const res = await get_messages(this.profile.room);
+      const res = await get_messages(
+        this.profile.room,
+        this.profile.user_email
+      );
       this.setup_messages(res);
       this.setup_actions();
       this.render();
@@ -106,7 +110,8 @@ export default class ChatSpace {
       this.message_html += this.make_message(
         element.content,
         get_time(element.creation),
-        message_type
+        message_type,
+        element.sender
       ).prop('outerHTML');
 
       this.prevMessage = element;
@@ -235,7 +240,6 @@ export default class ChatSpace {
     };
 
     $('.chat-back-button').on('click', function () {
-      me.destroy_socket_events();
       me.chat_list.render_messages();
       me.chat_list.render();
     });
@@ -313,7 +317,7 @@ export default class ChatSpace {
     }
   }
 
-  make_message(content, time, type) {
+  make_message(content, time, type, name) {
     const message_class =
       type === 'recipient' ? 'recipient-message' : 'sender-message';
     const $recipient_element = $(document.createElement('div')).addClass(
@@ -323,8 +327,13 @@ export default class ChatSpace {
       'message-bubble'
     );
 
+    const $name_element = $(document.createElement('div'))
+      .addClass('message-name')
+      .text(name);
+
     const n = content.lastIndexOf('/');
     const file_name = content.substring(n + 1) || '';
+    let $sanitized_content;
 
     if (content.startsWith('/files/') && file_name !== '') {
       let $url;
@@ -332,6 +341,10 @@ export default class ChatSpace {
         $url = $(document.createElement('img'));
         $url.attr({ src: content }).addClass('img-responsive chat-image');
         $message_element.css({ padding: '0px', background: 'inherit' });
+        $name_element.css({
+          color: 'var(--gray-600)',
+          'padding-bottom': 'var(--padding-xs)',
+        });
       } else {
         $url = $(document.createElement('a'));
         $url.attr({ href: content, target: '_blank' }).text(__(file_name));
@@ -340,13 +353,15 @@ export default class ChatSpace {
           $url.css('color', 'var(--cyan-100)');
         }
       }
-
-      $message_element.append($url);
+      $sanitized_content = $url;
     } else {
-      const sanitized_messages = $('<div>').text(content).html();
-      $message_element.append(__(sanitized_messages));
+      $sanitized_content = __($('<div>').text(content).html());
     }
 
+    if (type === 'sender' && this.profile.room_type === 'Group') {
+      $message_element.append($name_element);
+    }
+    $message_element.append($sanitized_content);
     $recipient_element.append($message_element);
     $recipient_element.append(`<div class='message-time'>${__(time)}</div>`);
 
@@ -371,12 +386,15 @@ export default class ChatSpace {
       clearTimeout(this.timeout);
     }
 
-    if (this.profile.is_admin === true) {
+    if (
+      this.profile.is_admin === true &&
+      frappe.Chat.settings.user.enable_message_tone === 1
+    ) {
       frappe.utils.play_sound('chat-message-send');
     }
 
     this.$chat_space_container.append(
-      this.make_message(content, get_time(), 'recipient')
+      this.make_message(content, get_time(), 'recipient', this.profile.user)
     );
     $type_message.val('');
     scroll_to_bottom(this.$chat_space_container);
@@ -394,7 +412,11 @@ export default class ChatSpace {
       return;
     }
 
-    if (this.profile.is_admin === true && $('.chat-element').is(':visible')) {
+    if (
+      this.profile.is_admin === true &&
+      $('.chat-element').is(':visible') &&
+      frappe.Chat.settings.user.enable_message_tone === 1
+    ) {
       frappe.utils.play_sound('chat-message-receive');
     }
 
@@ -405,7 +427,7 @@ export default class ChatSpace {
     }
 
     this.$chat_space_container.append(
-      this.make_message(res.content, time, chat_type)
+      this.make_message(res.content, time, chat_type, res.user)
     );
     scroll_to_bottom(this.$chat_space_container);
   }
@@ -413,7 +435,7 @@ export default class ChatSpace {
   render() {
     this.$wrapper.html(this.$chat_space);
     this.setup_events();
-    this.setup_socketio();
+
     scroll_to_bottom(this.$chat_space_container);
   }
 }
